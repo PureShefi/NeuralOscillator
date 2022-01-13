@@ -1,7 +1,7 @@
 import os
 
 for root, dirs, files in os.walk("training/source/", topdown=False):
-   for file in files:
+    for file in files:
         # Ignore files that we cant parse
         if not file.endswith(".rle"):
             continue
