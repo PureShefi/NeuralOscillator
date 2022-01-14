@@ -90,6 +90,16 @@ class RunLengthEncodedParser:
     def __str__(self):
         return self.rle_string
 
+    def get_board_pattern(self):
+        board = []
+        for row in self.pattern_2d_array:
+            row_array = []
+            for c in row:
+                row_array.append(1 if c != 'b' else -1)
+
+            board.append(row_array)
+        return board
+
     def get_human_friendly_pattern(self):
         pattern_str = ""
         for row in self.pattern_2d_array:
