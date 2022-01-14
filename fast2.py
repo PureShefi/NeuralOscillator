@@ -3,9 +3,10 @@ import time
 import random
 
 random.seed(1)
+np.random.seed(10)
 
 class DeepNeuralNetwork():
-    def __init__(self, sizes, epochs=50, l_rate=0.3):
+    def __init__(self, sizes, epochs=50, l_rate=0.02):
         self.sizes = sizes
         self.epochs = epochs
         self.l_rate = l_rate
@@ -137,8 +138,11 @@ print("[*] Loading dataset...")
 x_train, y_train = neural.GolDataSet(25, 25).get_training_data_set_fast()
 x_val, y_val = neural.GolDataSet(25, 25).get_training_data_set_fast("tests")
 
-dnn = DeepNeuralNetwork(sizes=[25*25, 8, 4, 2], epochs=100)
+dnn = DeepNeuralNetwork(sizes=[25*25, 16, 8, 2], epochs=150)
 dnn.train(x_train, y_train, x_val, y_val)
 
+def round2(val):
+    return [round(val[0]), round(val[1])]
+
 for x, y in zip(x_val, y_val):
-    print("OUTPUT", dnn.forward_pass(x), y)
+    print("OUTPUT", round2(dnn.forward_pass(x)), y, round2(dnn.forward_pass(x)) == y)
